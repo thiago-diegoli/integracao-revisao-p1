@@ -113,17 +113,4 @@ Tutorial.remove = (id, result) => {
   });
 };
 
-Tutorial.removeAll = result => {
-  sql.query("DELETE FROM tutorials", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-
-    console.log(`deleted ${res.affectedRows} tutorials`);
-    result(null, res);
-  });
-};
-
 module.exports = Tutorial;
