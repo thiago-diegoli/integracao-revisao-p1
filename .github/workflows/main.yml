@@ -99,7 +99,12 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add package.json
-          git commit -m "chore(release): version ${{ env.new_version }}"
-          git tag v${{ env.new_version }}
-          git push origin master --tags
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add package.json
+            git commit -m "chore(release): version ${{ env.new_version }}"
+            git tag v${{ env.new_version }}
+            git push origin master --tags
+          else
+            echo "Nenhuma mudança a ser comitada."
+          fi
